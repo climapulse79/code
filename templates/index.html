@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block title %}Home - ClimaPulse{% endblock %}
+
+{% block content %}
+<div class="row fullscreen">
+    <div class="col-12">
+        <div class="bg-light">
+            <p>Choosen location</p>
+            <h4>Wanale- Mbale, Uganda</h4>
+        </div>
+        <!-- first row  -->
+        <div class="row">
+            <div class="col-12">
+                <div class="rounded-custom hero-section" style=" height: 300px;">
+                    <div class="overlay">
+                        <div class="hero-content">
+                            <h1 id="temp1"></h1>
+                            <p id="datetime">Monday, 7:00 am</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+               
+        </div>
+        <!-- second row  -->
+        <div style="margin-top: 20px;" class="row">
+            <div class="bg-light">
+                <h4>Today's Highlights</h4>
+            </div>
+            <div class="col-3">
+                <div class="rounded-custom data-card">
+                    <p>Temperature</p>
+                    <h4 id="temp"></h4>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="rounded-custom data-card">
+                    <p>Humidity</p>
+                    <h4 id="hum"></h4>
+                </div>
+            </div>  
+            <div class="col-3">
+                <div class="rounded-custom data-card">
+                    <p>Pressure</p>
+                    <h4 id="pre"></h4>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="rounded-custom data-card">
+                    <p>Wind Direction</p>
+                    <h4 id="Win"></h4>
+                </div>
+            </div>  
+        </div>
+        <!-- third row  -->
+        <div class="row">
+            <div class="col-12">
+                <div class="bg-light" style="margin-top: 26px;">
+                </div>
+                <div class="rounded-custom data-card" style=" height: 250px;">
+                    <canvas id="liveChart" width="800" height="200"></canvas>
+                </div>
+            </div>  
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Blog - ClimaPulse{% endblock %}
+
+{% block content %}
+<div class="row fullscreen">
+    <div class="col-12">
+        <div class="bg-light">
+            <h4>Create a Blog Post</h4>
+        </div>
+        <!-- first row  -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card mb-4 shadow-sm" style="max-width: 950px; margin-top: 30px;">
+                    <div class="card-body">
+                        <form method="POST">
+                            {{ form.media }}
+                            {% csrf_token %}
+                            {% for field in form %}
+                                <div class="mb-3">
+                                    <label class="form-label">{{ field.label }}</label>
+                                    {{ field }}
+                                    {% if field.errors %}
+                                        <div class="text-danger small">{{ field.errors|striptags }}</div>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                            {{message}}
+                            <button type="submit" class="btn w-100" style="background-color: rgb(1, 1, 124); color: rgb(177, 177, 177);">Publish</button>
+                        </form>
+                    </div>
+                </div>
+                
+            </div>    
+        </div>
+    </div>
+</div>
+
+{% endblock %}

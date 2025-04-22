@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Blog - ClimaPulse{% endblock %}
+
+{% block content %}
+<div class="row fullscreen">
+    <div class="col-12">
+        <div class="bg-light">
+            <h4>Blog Post <span style="margin-left: 20px; font-size:large;"><a href="{% url 'create_blog' %}"><i class="bi bi-plus-circle fs-6 me-2"></i>Create a blog</a></span></h4>
+        </div>
+        <!-- first row  -->
+        <div class="row">
+            <div class="col-12">
+                {% for post in blog_posts %}
+                <div class="card mb-4 shadow-sm rounded-custom" style="max-width: 950px; margin-top: 20px;">
+                    <div class="card-body">
+                        <small class="text-muted">Posted on {{ post.created_at|date:"F j, Y" }} <span>By: {{post.user}}</span></small>
+                        <h5 class="card-title">{{post.title}}</h5>
+                        <p class="card-text text-muted">
+                            {{ post.content|truncatewords:50 }}
+                        </p>
+                        <!-- Likes and Dislikes -->
+                        <div class="d-flex justify-content-start align-items-center mb-2">
+                            <i class="bi bi-hand-thumbs-up me-1 text-primary"></i>
+                            <span class="me-3">24</span>
+                            <i class="bi bi-hand-thumbs-down me-1 text-danger"></i>
+                            <span>3</span>
+                        </div>
+                        <div class="text-end">
+                            <a href="#" class="btn btn-sm">Read More ></a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>    
+        </div>
+    </div>
+</div>
+
+{% endblock %}
