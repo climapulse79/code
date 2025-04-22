@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-p1bqj3ggh*cm-@=v_-q*q$$k$_cqk@(^i9ygofrh*_q+#^)8d+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['code-me9x.onrender.com']
 
 USE_TZ = True  # Enables timezone-aware datetimes
 TIME_ZONE = 'Africa/Kampala'  # or any preferred timezone
