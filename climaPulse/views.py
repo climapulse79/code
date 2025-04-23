@@ -93,10 +93,10 @@ def get_weather_data(request):
 
 def add_weather_data(request):
     if request.method == 'POST':
-        token = request.headers.get('Authorization')
+        # token = request.headers.get('Authorization')
 
-        if token != f"Token {API_TOKEN}":
-            return JsonResponse({'status': 'fail', 'message': 'Invalid token'}, status=403)
+        # if token != f"Token {API_TOKEN}":
+        #     return JsonResponse({'status': 'fail', 'message': 'Invalid token'}, status=403)
 
         wind_direction = request.POST.get('wind_direction')
         pressure = request.POST.get('pressure')
