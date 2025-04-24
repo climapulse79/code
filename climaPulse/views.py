@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import SignUpForm, BlogPostForm
 from .models import BlogPost, WeatherData
 from django.utils.timezone import localtime
+from django.views.decorators.csrf import csrf_exempt
 
 API_TOKEN = "_token_"
 
@@ -90,7 +91,7 @@ def get_weather_data(request):
     }
     return JsonResponse(data)
 
-
+@csrf_exempt
 def add_weather_data(request):
     if request.method == 'POST':
         # token = request.headers.get('Authorization')
