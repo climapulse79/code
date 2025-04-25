@@ -91,32 +91,43 @@ def get_weather_data(request):
     }
     return JsonResponse(data)
 
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
+from .models import WeatherData  # make sure this is imported correctly
+
 @csrf_exempt
 def add_weather_data(request):
     if request.method == 'POST':
-        # token = request.headers.get('Authorization')
+        try:
+            data = json.loads(request.body.decode('utf-8'))
 
-        # if token != f"Token {API_TOKEN}":
-        #     return JsonResponse({'status': 'fail', 'message': 'Invalid token'}, status=403)
+            wind_direction = data.get('wind_direction')
+            pressure = data.get('pressure')
+            temperature = data.get('temperature')
+            humidity = data.get('humidity')
 
-        wind_direction = request.POST.get('wind_direction')
-        pressure = request.POST.get('pressure')
-        temperature = request.POST.get('temperature')
-        humidity = request.POST.get('humidity')
+            if not all([wind_direction, pressure, temperature, humidity]):
+                return JsonResponse({'status': 'fail', 'message': 'Missing data'}, status=400)
 
-        if not all([wind_direction, pressure, temperature, humidity]):
-            return JsonResponse({'status': 'fail', 'message': 'Missing data'}, status=400)
+            WeatherData.objects.create(
+                wind_direction=wind_direction,
+                pressure=float(pressure),
+                temperature=float(temperature),
+                humidity=float(humidity)
+            )
 
-        WeatherData.objects.create(
-            wind_direction=wind_direction,
-            pressure=float(pressure),
-            temperature=float(temperature),
-            humidity=float(humidity)
-        )
+            return JsonResponse({'status': 'success', 'message': 'Data saved'}, status=200)
 
-        return JsonResponse({'status': 'success', 'message': 'Data saved'})
+        except json.JSONDecodeError:
+            return JsonResponse({'status': 'fail', 'message': 'Invalid JSON'}, status=400)
+
+        except Exception as e:
+            return JsonResponse({'status': 'fail', 'message': str(e)}, status=500)
+
     else:
         return JsonResponse({'status': 'fail', 'message': 'Only POST allowed'}, status=405)
+
     
 
 def get_chart_data(request):
